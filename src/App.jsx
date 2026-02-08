@@ -322,6 +322,9 @@ function App() {
     let pannerR = null;
 
     if (soundscapeEnabled && screen !== 'intro' && screen !== 'summary' && soundContext) {
+      if (soundContext.state === 'suspended') {
+        soundContext.resume();
+      }
       merger = soundContext.createChannelMerger(2);
 
       oscL = soundContext.createOscillator();
@@ -341,7 +344,7 @@ function App() {
 
       const gain = soundContext.createGain();
       gain.gain.setValueAtTime(0, soundContext.currentTime);
-      gain.gain.linearRampToValueAtTime(0.015, soundContext.currentTime + 2);
+      gain.gain.linearRampToValueAtTime(0.03, soundContext.currentTime + 2);
 
       oscL.connect(pannerL).connect(gain);
       oscR.connect(pannerR).connect(gain);
@@ -357,6 +360,9 @@ function App() {
   }, [soundscapeEnabled, screen, streak, soundContext]);
 
   const startRV = () => {
+    if (soundContext && soundContext.state === 'suspended') {
+      soundContext.resume();
+    }
     const target = RV_TARGETS[Math.floor(Math.random() * RV_TARGETS.length)];
     const coordinate = Math.floor(Math.random() * 89999999 + 10000000).toString();
     setRvTarget(target);
@@ -367,6 +373,9 @@ function App() {
   };
 
   const startExercise = () => {
+    if (soundContext && soundContext.state === 'suspended') {
+      soundContext.resume();
+    }
     setScreen('calibration');
     setTimeout(() => {
       setTargetIndex(Math.floor(Math.random() * 4));
@@ -530,7 +539,10 @@ function App() {
       <header className="theme-switcher">
         <div style={{ display: 'flex', gap: '1rem', marginRight: 'auto' }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            <input type="checkbox" checked={soundscapeEnabled} onChange={e => setSoundscapeEnabled(e.target.checked)} />
+            <input type="checkbox" checked={soundscapeEnabled} onChange={e => {
+              setSoundscapeEnabled(e.target.checked);
+              if (e.target.checked && soundContext.state === 'suspended') soundContext.resume();
+            }} />
             Alpha-Waves
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
