@@ -277,7 +277,7 @@ const RV_TARGETS = [
   { id: 'RV-015', name: 'Infinite Library', src: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80', location: 'The Great Archive', description: 'Endless rows of dark wooden bookshelves and old ladders under a glass dome.' },
 ];
 
-const MAX_TRIALS = 96; // 4 cycles of 24
+const MAX_TRIALS = 24;
 const CYCLE_SIZE = 24;
 
 function App() {
@@ -597,8 +597,7 @@ function App() {
         {screen === 'exercise' && (
           <section className="screen glass">
             <div className="status-bar">
-              <div>Cycle {Math.floor(history.length / CYCLE_SIZE) + 1} / 4</div>
-              <div>Trial {(history.length % CYCLE_SIZE) + 1} / {CYCLE_SIZE}</div>
+              <div>Trial {history.length + 1} / {MAX_TRIALS}</div>
               <div>Hits: {hits}</div>
             </div>
 
