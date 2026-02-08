@@ -182,6 +182,16 @@ const RV_TARGETS = [
   { id: 'RV-003', name: 'Natural Wonder', src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80', location: 'Mount Everest', description: 'Jagged white peaks against a blue sky, extremely cold.' },
   { id: 'RV-004', name: 'Maritime Structure', src: 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=800&q=80', location: 'Golden Gate Bridge', description: 'Large red structure over blue water, foggy atmosphere.' },
   { id: 'RV-005', name: 'Historic Sanctuary', src: 'https://images.unsplash.com/photo-1564507592333-c60657eaa0ae?auto=format&fit=crop&w=800&q=80', location: 'Taj Mahal', description: 'White domed structure with reflecting pools, symmetry.' },
+  { id: 'RV-006', name: 'Tropical Atoll', src: '/assets/scenes/rv_target_oasis.png', location: 'Maldive Islands', description: 'Circular coral island with white sand and clear turquoise lagoon.' },
+  { id: 'RV-007', name: 'Cyberpunk Skyline', src: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=800&q=80', location: 'Neo-Tokyo Concept', description: 'Dense futuristic skyscrapers with neon signs and flying vehicles.' },
+  { id: 'RV-008', name: 'Gothic Interior', src: 'https://images.unsplash.com/photo-1548544149-4835e62ee5b3?auto=format&fit=crop&w=800&q=80', location: 'Cathedral of Light', description: 'High vaulted ceilings, stained glass windows, and stone pillars.' },
+  { id: 'RV-009', name: 'Active Volcano', src: 'https://images.unsplash.com/photo-1531366930499-41f693cb71e1?auto=format&fit=crop&w=800&q=80', location: 'Mount Etna', description: 'Molten orange lava flowing down a dark volcanic slope at night.' },
+  { id: 'RV-0010', name: 'Deep Forest', src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80', location: 'Redwood National Park', description: 'Massive vertical tree trunks with sunlight filtering through dense canopy.' },
+  { id: 'RV-011', name: 'Orbital View', src: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80', location: 'Low Earth Orbit', description: 'The curvature of the Earth at night with city lights and thin atmosphere.' },
+  { id: 'RV-012', name: 'Desert Canyons', src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80', location: 'Antelope Canyon', description: 'Swirling red sandstone walls carved by water, narrow shafts of light.' },
+  { id: 'RV-013', name: 'Arctic Research', src: 'https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=800&q=80', location: 'Svalbard Station', description: 'Small geometric buildings buried in deep snow under the Northern Lights.' },
+  { id: 'RV-014', name: 'Underwater Reef', src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80', location: 'Great Barrier Reef', description: 'Vibrant coral structures with schools of tropical fish and blue rays of light.' },
+  { id: 'RV-015', name: 'Infinite Library', src: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80', location: 'The Great Archive', description: 'Endless rows of dark wooden bookshelves and old ladders under a glass dome.' },
 ];
 
 const MAX_TRIALS = 24;
