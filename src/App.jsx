@@ -741,19 +741,23 @@ function App() {
           <section className="screen glass">
             <h1 className="screen-title" style={{ textAlign: 'center' }}>{copy.summaryTitle}</h1>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', textAlign: 'center', margin: '2rem 0' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', textAlign: 'center', margin: '2rem 0' }}>
               <div><Label>Hits</Label><div style={{ fontSize: '1.4rem', fontWeight: 600 }}>{hits}</div></div>
+              <div><Label>Max Streak</Label><div style={{ fontSize: '1.4rem', fontWeight: 600 }}>{history.reduce((max, h, i, arr) => {
+                let current = 0;
+                for (let j = i; j < arr.length && arr[j].correct; j++) current++;
+                return Math.max(max, current);
+              }, 0)}</div></div>
               <div><Label>Correlation</Label><div style={{ fontSize: '1.4rem', fontWeight: 600 }}>{correlation}</div></div>
               <div>
-                <Label>{theme === 'clinical' ? 'Archetype' : 'Your Profile'}</Label>
-                <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--accent)', lineHeight: '1.1' }}>
+                <Label>{theme === 'clinical' ? 'Archetype' : 'Profile'}</Label>
+                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--accent)', lineHeight: '1.1' }}>
                   {archetype.name}
                 </div>
-                <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', lineHeight: '1.2', marginTop: '4px' }}>
-                  {archetype.desc}
-                </div>
               </div>
-              <div><Label>Rank</Label><div style={{ fontSize: '1.4rem', fontWeight: 600 }}>{hits >= 12 ? 'Elite' : (hits >= 8 ? 'Solid' : 'Novice')}</div></div>
+              <div><Label>Rank</Label><div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--accent)' }}>
+                {hits >= 21 ? 'Singularity' : (hits >= 17 ? 'Oracle Tier' : (hits >= 11 ? 'Resonant' : (hits >= 7 ? 'Calibrated' : 'Baseline')))}
+              </div></div>
             </div>
 
             <div className="trend-chart">
@@ -774,6 +778,27 @@ function App() {
                   <span>{h.imageObj.label} ({(h.confidence * 10).toFixed(0)} sense)</span>
                 </div>
               ))}
+            </div>
+
+            <div className="leaderboard-grid">
+              <div className="global-stats-card">
+                <Label>Global Percentile</Label>
+                <div className="stat-value-large">
+                  {hits >= 18 ? '99.9' : (hits >= 14 ? '92.4' : (hits >= 10 ? '78.2' : '42.1'))}%
+                </div>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  You performed better than {hits >= 10 ? 'the majority of' : 'average'} scouts in the Phoenix Protocol database.
+                </p>
+              </div>
+
+              <div className="leaderboard-section">
+                <Label>Recent High Scouts (Phoenix Protocol)</Label>
+                <div className="leaderboard-item"><span>1. Project_ORION</span> <span>21 hits</span></div>
+                <div className="leaderboard-item"><span>2. Sentinel_V</span> <span>19 hits</span></div>
+                <div className={`leaderboard-item current-user`}><span>3. YOU</span> <span>{hits} hits</span></div>
+                <div className="leaderboard-item"><span>4. Ghost_Signal</span> <span>12 hits</span></div>
+                <div className="leaderboard-item"><span>5. Vector_Alpha</span> <span>10 hits</span></div>
+              </div>
             </div>
 
             <div className="mentor-insight-card">
