@@ -37,39 +37,52 @@
 /* Screen Layouts */
 .screen {
   background: var(--bg-surface);
-  padding: 3rem;
+  padding: 3.5rem;
   border-radius: var(--radius-main);
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-md);
-  animation: slideIn 0.5s var(--ease-out);
+  animation: slideIn 0.8s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.screen.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px) scale(0.98);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .screen-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
 .screen-title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
   color: var(--text-main);
+  font-weight: 500;
 }
 
 .screen-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--text-muted);
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.5;
 }
 
 .screen-description {
@@ -430,6 +443,7 @@
   font-size: 0.8rem;
   color: var(--text-muted);
 }
+
 /* Social Interpretation */
 .social-interpretation-box {
   background: var(--bg-tile);
@@ -580,52 +594,87 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 400px;
+  min-height: 450px;
 }
 
 .ritual-circle {
-  width: 150px;
-  height: 150px;
-  border: 2px solid var(--accent);
+  width: 220px;
+  height: 220px;
+  border: 1px solid var(--glass-border);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 3rem 0;
   position: relative;
+  background: rgba(var(--accent-rgb), 0.05);
 }
 
+.ritual-inner {
+  width: 120px;
+  height: 120px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  box-shadow: 0 0 40px var(--accent);
+  z-index: 2;
+}
+
+.ritual-circle::before,
 .ritual-circle::after {
   content: '';
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 1px solid var(--accent-soft);
+  border: 1px solid var(--accent);
   border-radius: 50%;
-  animation: ripple 3s infinite;
+  opacity: 0.3;
+  animation: ripple 4s infinite linear;
+}
+
+.ritual-circle::after {
+  animation-delay: 2s;
 }
 
 @keyframes ripple {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(3); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
 }
 
 .mentor-insight-card {
   background: var(--bg-surface);
-  border: 1px solid var(--accent-soft);
-  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  padding: 3rem;
   border-radius: var(--radius-main);
-  margin-top: 2rem;
+  margin-top: 3rem;
   text-align: left;
   position: relative;
+  box-shadow: var(--shadow-md);
 }
 
 .mentor-insight-card::before {
-  content: '"';
+  content: "INSIGHT";
   position: absolute;
   top: -10px;
-  left: 10px;
-  font-size: 3rem;
-  color: var(--accent-soft);
-  font-family: serif;
+  left: 30px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: white;
+  background: var(--accent);
+  padding: 4px 12px;
+  border-radius: 4px;
 }

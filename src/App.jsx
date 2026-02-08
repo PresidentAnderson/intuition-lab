@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import './App.css';
 
-function ZenParticles({ confidence }) {
-  const particles = useMemo(() => Array.from({ length: 20 }, (_, i) => ({
+function ZenParticles({ confidence, streak }) {
+  const particles = useMemo(() => Array.from({ length: 40 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    size: Math.random() * 10 + 2,
-    duration: Math.random() * 10 + 10
+    size: Math.random() * 20 + 5,
+    duration: Math.random() * 15 + 10,
+    delay: Math.random() * -20
   })), []);
 
   return (
@@ -21,9 +22,12 @@ function ZenParticles({ confidence }) {
             top: `${p.y}%`,
             width: `${p.size}px`,
             height: `${p.size}px`,
-            transform: `translate(${confidence * 50 - 25}px, ${confidence * 50 - 25}px)`,
-            opacity: 0.1 + (confidence * 0.4),
-            transitionDuration: `${p.duration}s`
+            background: `radial-gradient(circle, var(--accent) 0%, transparent 70%)`,
+            transform: `translate(${(confidence - 0.5) * 100}px, ${(confidence - 0.5) * 100}px) scale(${0.5 + (streak * 0.1)})`,
+            opacity: 0.05 + (confidence * 0.3),
+            animation: `float ${p.duration}s ease-in-out infinite`,
+            animationDelay: `${p.delay}s`,
+            filter: `blur(${10 - (confidence * 8)}px)`
           }}
         />
       ))}
@@ -109,11 +113,11 @@ const CONTENT = {
     summaryInterp: "Your sensitivity at this difficulty is above baseline but not yet stable.",
     passLabel: "Pass",
     encouragement: {
-      6: "You're beginning to tune in.",
-      8: "Steady focus is showing results.",
-      10: "Significant intuitive alignment.",
-      12: "Excellent sensory detection.",
-      14: "Exceptional intuitive awareness."
+      6: "Signal alignment detected.",
+      8: "Intuitive flow state active.",
+      10: "Exceptional receptive clarity.",
+      12: "Pattern recognition maximized.",
+      14: "Total sensory integration."
     }
   },
   warm: {
@@ -223,22 +227,27 @@ function App() {
     let pannerL = null;
     let pannerR = null;
 
-    if (soundscapeEnabled && screen === 'exercise' && soundContext) {
+    if (soundscapeEnabled && screen !== 'intro' && screen !== 'summary' && soundContext) {
       merger = soundContext.createChannelMerger(2);
 
       oscL = soundContext.createOscillator();
       pannerL = soundContext.createStereoPanner();
       pannerL.pan.value = -1;
-      oscL.frequency.value = 200;
+      // Base frequency lowers as streak increases for "deep" focus
+      const baseFreq = 200 - (streak * 5);
+      oscL.frequency.value = baseFreq;
 
       oscR = soundContext.createOscillator();
       pannerR = soundContext.createStereoPanner();
       pannerR.pan.value = 1;
-      oscR.frequency.value = 200 + 10; // 10Hz Binaural Beat
+
+      // Binaural beat frequency increases with streak (Alpha -> Gamma)
+      const beatFreq = 10 + (streak * 2);
+      oscR.frequency.value = baseFreq + beatFreq;
 
       const gain = soundContext.createGain();
       gain.gain.setValueAtTime(0, soundContext.currentTime);
-      gain.gain.linearRampToValueAtTime(0.02, soundContext.currentTime + 1);
+      gain.gain.linearRampToValueAtTime(0.015, soundContext.currentTime + 2);
 
       oscL.connect(pannerL).connect(gain);
       oscR.connect(pannerR).connect(gain);
@@ -251,7 +260,7 @@ function App() {
       if (oscL) oscL.stop();
       if (oscR) oscR.stop();
     };
-  }, [soundscapeEnabled, screen, soundContext]);
+  }, [soundscapeEnabled, screen, streak, soundContext]);
 
   const startRV = () => {
     const target = RV_TARGETS[Math.floor(Math.random() * RV_TARGETS.length)];
@@ -401,11 +410,17 @@ function App() {
 
     const avgLatency = choices.reduce((a, h) => a + h.latency, 0) / choices.length;
     const confidenceGap = choices.reduce((a, h) => a + Math.abs(h.confidence - (h.correct ? 1 : 0)), 0) / choices.length;
+    const streakHits = history.reduce((max, h, i, arr) => {
+      let current = 0;
+      for (let j = i; j < arr.length && arr[j].correct; j++) current++;
+      return Math.max(max, current);
+    }, 0);
 
-    if (confidenceGap > 0.6) return "Your conscious confidence is currently disconnected from your intuitive hits. Try choosing faster without 'checking' your feeling.";
-    if (avgLatency < 1.0 && hits > 10) return "You've found the flow state. Your rapid-fire accuracy is exceptional. Maintain this pace—don't let doubt slow you down.";
-    if (avgLatency > 2.5) return "Your analytical mind is likely interfering. The signal is strongest in the first 0.8 seconds. Try to move 'before the thought'.";
-    return "You are showing steady calibration. Focus on the subtle physical sensation (warmth or weight) when hovering over the correct tile.";
+    if (confidenceGap > 0.6) return "Your conscious confidence is currently disconnected from your intuitive hits. You are 'thinking' you are right when the signal is actually elsewhere. Try choosing purely on the first physical impulse.";
+    if (avgLatency < 0.8 && hits > 10) return "You've accessed the 'Fast Observer' state. Your accuracy at high speed suggests you are bypassing the analytical filter entirely. This is the goal of the Phoenix Protocol.";
+    if (avgLatency > 2.5) return "Warning: Analysis paralysis detected. The signal degrades significantly after 1.5 seconds. The 'truth' is in the first glance. Try to move before the internal dialogue starts.";
+    if (streakHits >= 4) return "Resonant Flow: You've achieved a sustained alignment with the target field. Notice the specific quality of internal quiet you had during that streak.";
+    return "Steady calibration in progress. Your sensory detection is stabilizing. Focus on the subtle 'weight' or 'pull' in your solar plexus when hovering over the target tile.";
   }, [history, hits]);
 
   const copy = CONTENT[theme];
@@ -413,7 +428,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <ZenParticles confidence={confidence} />
+      <ZenParticles confidence={confidence} streak={streak} />
       <header className="theme-switcher">
         <div style={{ display: 'flex', gap: '1rem', marginRight: 'auto' }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -431,34 +446,38 @@ function App() {
 
       <main>
         {screen === 'calibration' && (
-          <section className="screen">
+          <section className="screen glass">
             <div className="calibration-ritual">
-              <h2 className="screen-title">{theme === 'clinical' ? 'Baseline Calibration' : 'Centering...'}</h2>
-              <p className="screen-subtitle">Match your breath to the expansion. Release all data expectations.</p>
+              <h2 className="screen-title">{theme === 'clinical' ? 'Baseline Calibration' : 'Centering Ritual'}</h2>
+              <p className="screen-subtitle">Match your breath to the expansion. Release all analytical expectations.</p>
               <div className="ritual-circle">
-                <div style={{ animation: 'breathing 4s infinite' }}>{theme === 'clinical' ? 'READY' : 'FLOW'}</div>
+                <div className="ritual-inner" style={{ animation: 'breathing var(--breath-cycle) infinite ease-in-out' }}>
+                  {theme === 'clinical' ? 'CALIBRATING' : 'RECEPTIVE'}
+                </div>
               </div>
+              <div className="metrics-display">Syncing bio-rhythms to local target field...</div>
             </div>
           </section>
         )}
 
         {screen === 'intro' && (
-          <section className="screen">
+          <section className="screen glass">
             <div className="screen-header">
-              <h1 className="screen-title">{copy.title}</h1>
-              <p className="screen-subtitle">{copy.subtitle}</p>
-              {personalBest > 0 && <div className="metrics-display" style={{ color: 'var(--accent)', fontWeight: 600 }}>Personal Best: {personalBest} hits</div>}
+              <div className="status-badge" style={{ background: 'var(--accent-soft)', color: 'var(--accent)', marginBottom: '1rem' }}>v1.0.2 - Phoenix Protocol</div>
+              <h1 className="screen-title">Intuition Lab</h1>
+              <p className="screen-subtitle">Advanced Social Perception & Remote Viewing</p>
+              {personalBest > 0 && <div className="metrics-display" style={{ color: 'var(--accent)', fontWeight: 600, marginTop: '1rem' }}>Personal Best: {personalBest} hits</div>}
             </div>
             <div className="instructions-box">
               <h3>{theme === 'clinical' ? 'Instructions' : 'How this works'}</h3>
               <p>{copy.instructions}</p>
               <p style={{ marginTop: '1rem', fontStyle: 'italic', fontSize: '0.85rem' }}>Note: {copy.note}</p>
             </div>
-            <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-              <button className="button-primary" onClick={startExercise}>
-                ESP Training
+            <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
+              <button className="button-primary" onClick={startExercise} style={{ padding: '1rem 2.5rem' }}>
+                Social Intuition
               </button>
-              <button className="button-secondary" onClick={startRV}>
+              <button className="button-secondary" onClick={startRV} style={{ padding: '1rem 2.5rem' }}>
                 Remote Viewing
               </button>
             </div>
@@ -466,7 +485,7 @@ function App() {
         )}
 
         {screen === 'exercise' && (
-          <section className="screen">
+          <section className="screen glass">
             <div className="status-bar">
               <div>Trial {history.length + 1} / {MAX_TRIALS}</div>
               <div>Hits: {hits}</div>
@@ -501,7 +520,7 @@ function App() {
         )}
 
         {screen === 'rv' && (
-          <section className="screen">
+          <section className="screen glass">
             {rvStep === 0 && (
               <div style={{ textAlign: 'center' }}>
                 <Label>Mental Coordinate Hook</Label>
@@ -574,7 +593,7 @@ function App() {
         )}
 
         {screen === 'feedback' && (
-          <section className="screen">
+          <section className="screen glass">
             <div className="feedback-overlay">
               {showGoalFeedback && <div className="goal-announcement">{showGoalFeedback}</div>}
               <div className={`status-badge ${selectedIndex === targetIndex ? 'status-correct' : 'status-incorrect'}`}>
@@ -609,7 +628,7 @@ function App() {
         )}
 
         {screen === 'summary' && (
-          <section className="screen">
+          <section className="screen glass">
             <h1 className="screen-title" style={{ textAlign: 'center' }}>{copy.summaryTitle}</h1>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', textAlign: 'center', margin: '2rem 0' }}>
