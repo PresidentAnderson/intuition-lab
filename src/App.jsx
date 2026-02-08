@@ -150,6 +150,7 @@ const CONTENT = {
 };
 
 const IMAGES = [
+  // Social/Emotional Cues (1-25)
   { src: 'https://images.unsplash.com/photo-1542080681-b52d382482b0?auto=format&fit=crop&w=400&q=80', label: 'Suspicion', meaning: 'Narrowed eyes and lowered brows often signal a lack of trust.' },
   { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', label: 'Contempt', meaning: 'Asymmetric lip tightening can indicate a sense of superiority.' },
   { src: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80', label: 'Surprise', meaning: 'Raised eyebrows and widened eyes signal a sudden shift in attention.' },
@@ -173,7 +174,89 @@ const IMAGES = [
   { src: 'https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?auto=format&fit=crop&w=400&q=80', label: 'Confidence', meaning: 'An open chest and steady breathing indicate a state of flow.' },
   { src: 'https://images.unsplash.com/photo-1512485600893-b08ec1d59b1c?auto=format&fit=crop&w=400&q=80', label: 'Submission', meaning: 'Looking down and slightly shrinking the posture signals non-aggression.' },
   { src: 'https://images.unsplash.com/photo-1474176857210-7287d38d27c6?auto=format&fit=crop&w=400&q=80', label: 'Playfulness', meaning: 'A slight eye squint and relaxed jaw show lighthearted intent.' },
-  { src: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=400&q=80', label: 'Observation', meaning: 'A neutral, scanning gaze is used to take in wide social fields.' }
+  { src: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=400&q=80', label: 'Observation', meaning: 'A neutral, scanning gaze is used to take in wide social fields.' },
+  { src: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=400&q=80', label: 'Openness', meaning: 'Exposed palms and unbuttoned clothing signal an absence of defenses.' },
+
+  // Environments/Architectural (26-50)
+  { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80', label: 'Precision', meaning: 'Sharp geometric lines in glass architecture signal clinical focus.' },
+  { src: 'https://images.unsplash.com/photo-1449156003053-93d3adec3f27?auto=format&fit=crop&w=400&q=80', label: 'Solitude', meaning: 'The vastness of a desert road often reflects internal sensory silence.' },
+  { src: 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=400&q=80', label: 'Vitality', meaning: 'Sunlight through a dense canopy represents a state of high intuitive energy.' },
+  { src: 'https://images.unsplash.com/photo-1518005020411-38b812115df5?auto=format&fit=crop&w=400&q=80', label: 'Order', meaning: 'Symmetrical urban layouts suggest a highly structured analytical mind.' },
+  { src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=400&q=80', label: 'Flow', meaning: 'A calm mountain lake surface mirrors a perfectly calibrated mind.' },
+  { src: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=400&q=80', label: 'Adventure', meaning: 'Jagged rock formations represent the overcoming of sensory noise.' },
+  { src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80', label: 'Peak', meaning: 'Snow-capped summits symbolize the highest level of remote focus.' },
+  { src: 'https://images.unsplash.com/photo-1433086566087-632349007f9c?auto=format&fit=crop&w=400&q=80', label: 'Balance', meaning: 'Waterfall dynamics suggest a balance between strength and receptivity.' },
+  { src: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=400&q=80', label: 'Grounded', meaning: 'The texture of dry earth signals a need for grounding before a session.' },
+  { src: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80', label: 'Expansive', meaning: 'A wide horizon indicates a soul searching for wide-field coordinates.' },
+  { src: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=400&q=80', label: 'Natural', meaning: 'Curved valleys suggest the organic path of least resistance in thought.' },
+  { src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=400&q=80', label: 'Ancient', meaning: 'Deep woods represent the storage of deep ancestral intuition.' },
+  { src: 'https://images.unsplash.com/photo-1444090542259-0af8fa96557e?auto=format&fit=crop&w=400&q=80', label: 'Clarity', meaning: 'Crisp morning air in a canyon mirrors a fresh mental baseline.' },
+  { src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80', label: 'Dynamic', meaning: 'A sunset over Yosemite highlights the constant transition of signals.' },
+  { src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80', label: 'Resilient', meaning: 'High-altitude conifers represent the persistence of intuition in harsh conditions.' },
+  { src: 'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?auto=format&fit=crop&w=400&q=80', label: 'Ethereal', meaning: 'Waves hitting a rocky shore represent the boundary between known and unknown.' },
+  { src: 'https://images.unsplash.com/photo-1510784722466-f2aa9c52fed6?auto=format&fit=crop&w=400&q=80', label: 'Warmth', meaning: 'Golden hour light indicates the optimal state for social attunement.' },
+  { src: 'https://images.unsplash.com/photo-1505765050516-f72dcac9c70f?auto=format&fit=crop&w=400&q=80', label: 'Urbanity', meaning: 'The hum of a city at night represents background cognitive noise.' },
+  { src: 'https://images.unsplash.com/photo-1433838552652-f9a46b332c40?auto=format&fit=crop&w=400&q=80', label: 'Flight', meaning: 'Aerial views suggest a detached, objective viewpoint on a target.' },
+  { src: 'https://images.unsplash.com/photo-1426604966848-d7adac402bdb?auto=format&fit=crop&w=400&q=80', label: 'Depth', meaning: 'The shadow side of a mountain reveals hidden intuitive data.' },
+  { src: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=400&q=80', label: 'Growth', meaning: 'Fiddlehead ferns represent the initial curl of a new intuitive hit.' },
+  { src: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=400&q=80', label: 'Peace', meaning: 'A lakeside cottage represents the stabilization of the analytical mind.' },
+  { src: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=400&q=80', label: 'Endless', meaning: 'Vast meadows suggest an infinite field of possible outcomes.' },
+  { src: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=400&q=80', label: 'Renewal', meaning: 'Water flowing over mossy stones signals a cleared sensory channel.' },
+  { src: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80', label: 'Rooted', meaning: 'Massive oak roots symbolize the anchor of the physical body.' },
+
+  // Abstract Patterns/Textures (51-75)
+  { src: 'https://images.unsplash.com/photo-1503455634867-c9ca11da3f68?auto=format&fit=crop&w=400&q=80', label: 'Complexity', meaning: 'Neural-like patterns in nature represent information pathways.' },
+  { src: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=400&q=80', label: 'Collision', meaning: 'Abstract fluid dynamics suggest the interaction of two thoughts.' },
+  { src: 'https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?auto=format&fit=crop&w=400&q=80', label: 'Void', meaning: 'Dark matter-like textures represent the silence between hits.' },
+  { src: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=400&q=80', label: 'Signal', meaning: 'High-frequency line patterns represent raw psychic data stream.' },
+  { src: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=400&q=80', label: 'Decay', meaning: 'Weathered textures signaling the fading of stale information.' },
+  { src: 'https://images.unsplash.com/photo-1544256718-3bcf237f3167?auto=format&fit=crop&w=400&q=80', label: 'Crystal', meaning: 'Fractal structures reveal the repeating nature of truths.' },
+  { src: 'https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?auto=format&fit=crop&w=400&q=80', label: 'Rhythm', meaning: 'Periodic ripples suggesting a steady wave of reception.' },
+  { src: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=400&q=80', label: 'Distortion', meaning: 'Blurred lights indicating the presence of analytical overlay (AOL).' },
+  { src: 'https://images.unsplash.com/photo-1513506494265-99b5fc580916?auto=format&fit=crop&w=400&q=80', label: 'Web', meaning: 'Interconnected threads representing the social field network.' },
+  { src: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=400&q=80', label: 'Layering', meaning: 'Multiple transparent planes suggest complex emotional depths.' },
+  { src: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=400&q=80', label: 'Erosion', meaning: 'Smoothed surfaces indicating well-practiced intuition.' },
+  { src: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=400&q=80', label: 'Static', meaning: 'Granular textures represent low-level sensory interference.' },
+  { src: 'https://images.unsplash.com/photo-1515549832467-8cbb04f3263c?auto=format&fit=crop&w=400&q=80', label: 'Vortex', meaning: 'Swirling patterns signaling a high-concentration focus point.' },
+  { src: 'https://images.unsplash.com/photo-1493606371202-61806748f024?auto=format&fit=crop&w=400&q=80', label: 'Melting', meaning: 'Flowing textures suggest the dissolving of the ego during a session.' },
+  { src: 'https://images.unsplash.com/photo-1557682224-192535d4f23b?auto=format&fit=crop&w=400&q=80', label: 'Ascension', meaning: 'Upward-moving gradients indicate a shift to higher sensory planes.' },
+  { src: 'https://images.unsplash.com/photo-1454165833222-d1226065427c?auto=format&fit=crop&w=400&q=80', label: 'Density', meaning: 'Thick, opaque textures represent "heavy" target data.' },
+  { src: 'https://images.unsplash.com/photo-1508717272800-9fff97da7e8f?auto=format&fit=crop&w=400&q=80', label: 'Radiance', meaning: 'Light diffusing from a center points to a clear realization.' },
+  { src: 'https://images.unsplash.com/photo-1550859492-d5da3d8e3588?auto=format&fit=crop&w=400&q=80', label: 'Grating', meaning: 'Harsh patterns represent sudden ego-driven corrections.' },
+  { src: 'https://images.unsplash.com/photo-1554034483-345095d105be?auto=format&fit=crop&w=400&q=80', label: 'Prism', meaning: 'Light splitting into colors represents the analysis of a signal.' },
+  { src: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=400&q=80', label: 'Nebula', meaning: 'Cosmic clouds represent the infinite potential of the mind.' },
+  { src: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1?auto=format&fit=crop&w=400&q=80', label: 'Pulse', meaning: 'Repetitive geometric beats suggest a heartbeat-synced session.' },
+  { src: 'https://images.unsplash.com/photo-1511216113906-8f57bb83e776?auto=format&fit=crop&w=400&q=80', label: 'Shadow', meaning: 'Silhouettes representing the unknown elements of a coordinate.' },
+  { src: 'https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?auto=format&fit=crop&w=400&q=80', label: 'Infinity', meaning: 'Looping patterns suggest the recursive nature of time/space data.' },
+  { src: 'https://images.unsplash.com/photo-1531685250784-75692621497a?auto=format&fit=crop&w=400&q=80', label: 'Atmosphere', meaning: 'Soft mists represent the thinning of baseline reality.' },
+  { src: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bcc0?auto=format&fit=crop&w=400&q=80', label: 'Universal', meaning: 'The vast night sky represents the total coordinate field.' },
+
+  // Micro-details/Hand Cues (76-100)
+  { src: 'https://images.unsplash.com/photo-1516733968668-dbdce39c46ef?auto=format&fit=crop&w=400&q=80', label: 'Closure', meaning: 'A tightly closed fist often signals non-verbal defensiveness.' },
+  { src: 'https://images.unsplash.com/photo-1531983412531-1f49a365f698?auto=format&fit=crop&w=400&q=80', label: 'Invitation', meaning: 'Open hands resting flat suggest a high degree of transparency.' },
+  { src: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?auto=format&fit=crop&w=400&q=80', label: 'Constraint', meaning: 'Hands behind the back can indicate controlled internal pressure.' },
+  { src: 'https://images.unsplash.com/photo-1516245834210-c4c049622ed0?auto=format&fit=crop&w=400&q=80', label: 'Tenderness', meaning: 'A soft palm touch represents biological empathy signals.' },
+  { src: 'https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&w=400&q=80', label: 'Direct', meaning: 'Pointing or rigid fingers signal an external target focus.' },
+  { src: 'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=400&q=80', label: 'Micro-move', meaning: 'Finger twitching indicates rapid internal processing.' },
+  { src: 'https://images.unsplash.com/photo-1513297845702-0e9d1ca907c1?auto=format&fit=crop&w=400&q=80', label: 'Vulnerability', meaning: 'Exposing the wrists is a sign of deep trust or submission.' },
+  { src: 'https://images.unsplash.com/photo-1506126274587-c317273f91ea?auto=format&fit=crop&w=400&q=80', label: 'Reflection', meaning: 'Hands covering the mouth suggest a censored or reflective state.' },
+  { src: 'https://images.unsplash.com/photo-1490131784822-b56a45664a9a?auto=format&fit=crop&w=400&q=80', label: 'Support', meaning: 'One hand holding another signals a self-comforting loop.' },
+  { src: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80', label: 'Release', meaning: 'Wringing hands represent the discharge of intuitive tension.' },
+  { src: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=400&q=80', label: 'Contrast', meaning: 'Harsh hand shadows represent the dark side of a social signal.' },
+  { src: 'https://images.unsplash.com/photo-1504194081532-a521e149f391?auto=format&fit=crop&w=400&q=80', label: 'Stillness', meaning: 'Motionless fingers represent the perfect "zero point" state.' },
+  { src: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80', label: 'Gaze', meaning: 'Looking away indicates a shift to internal visual processing.' },
+  { src: 'https://images.unsplash.com/photo-1533227268408-a320146059fd?auto=format&fit=crop&w=400&q=80', label: 'Determination', meaning: 'Fixed eye contact signaling extreme intent-alignment.' },
+  { src: 'https://images.unsplash.com/photo-1516575150278-771891de6162?auto=format&fit=crop&w=400&q=80', label: 'Barrier', meaning: 'Crossed arms signal a refusal to share intuitive data.' },
+  { src: 'https://images.unsplash.com/photo-1512485600893-b08ec1d59b1c?auto=format&fit=crop&w=400&q=80', label: 'Humble', meaning: 'A bowed head shows receptivity to the target coordinate.' },
+  { src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80', label: 'Warm smile', meaning: 'Genuine eye wrinkles indicate true emotional resonance.' },
+  { src: 'https://images.unsplash.com/photo-1502376739161-dcaec7162237?auto=format&fit=crop&w=400&q=80', label: 'Distracted', meaning: 'Loss of eye focus signals the intervention of memory.' },
+  { src: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&w=400&q=80', label: 'Micro-anger', meaning: 'Flared nostrils indicating a subterranean emotional hit.' },
+  { src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=400&q=80', label: 'Micro-disgust', meaning: 'A momentary nose crinkle reveal an intuitive mismatch.' },
+  { src: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=400&q=80', label: 'Neutral', meaning: 'The "poker face" target: the baseline state of observation.' },
+  { src: 'https://images.unsplash.com/photo-1520626337972-ebf863448db6?auto=format&fit=crop&w=400&q=80', label: 'Subconscious', meaning: 'Touching the temple represents active data retrieval.' },
+  { src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80', label: 'Intensity', meaning: 'A locked gaze represents the "hook" into a target signal.' },
+  { src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80', label: 'Depth', meaning: 'Eyes that "see through" objects reveal the remote view state.' },
+  { src: 'https://images.unsplash.com/photo-1531746020798-e795c5399c47?auto=format&fit=crop&w=400&q=80', label: 'Finality', meaning: 'The closing of the eyes signifies the end of a successful session.' },
 ];
 
 const RV_TARGETS = [
@@ -194,7 +277,8 @@ const RV_TARGETS = [
   { id: 'RV-015', name: 'Infinite Library', src: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80', location: 'The Great Archive', description: 'Endless rows of dark wooden bookshelves and old ladders under a glass dome.' },
 ];
 
-const MAX_TRIALS = 24;
+const MAX_TRIALS = 96; // 4 cycles of 24
+const CYCLE_SIZE = 24;
 
 function App() {
   const [mode, setMode] = useState('esp'); // 'esp' or 'rv'
@@ -298,13 +382,17 @@ function App() {
     setScreen('feedback');
     const duration = (Date.now() - startTime) / 1000;
 
+    const currentTrialIndex = history.length;
+    // Rotate through the image pool
+    const imageObj = IMAGES[currentTrialIndex % IMAGES.length];
+
     const newHistory = [...history, {
       correct: isCorrect,
       latency: duration,
       confidence,
       type: 'choice',
       target: targetIndex,
-      imageObj: IMAGES[history.length]
+      imageObj: imageObj
     }];
     setHistory(newHistory);
 
@@ -497,7 +585,8 @@ function App() {
         {screen === 'exercise' && (
           <section className="screen glass">
             <div className="status-bar">
-              <div>Trial {history.length + 1} / {MAX_TRIALS}</div>
+              <div>Cycle {Math.floor(history.length / CYCLE_SIZE) + 1} / 4</div>
+              <div>Trial {(history.length % CYCLE_SIZE) + 1} / {CYCLE_SIZE}</div>
               <div>Hits: {hits}</div>
             </div>
 
